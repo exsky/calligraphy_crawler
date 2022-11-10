@@ -1,3 +1,4 @@
+import os
 import requests
 import aiohttp
 import asyncio
@@ -26,6 +27,10 @@ def fetch_calligraphy_links():
 async def download_ch_word_pics(ch, links, session):
     # first ch word -> just let the file name eq to ch
     # more than one links -> count and set serial
+    try:
+        os.makedirs('pics')
+    except FileExistsError:
+        print('Directory pics already existed')
     count = 1
     for link in links:
         try:
